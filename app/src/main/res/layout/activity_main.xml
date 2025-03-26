@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="269dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-40dp"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="182dp"
+        android:src="@drawable/border1" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="407dp"
+        android:layout_height="173dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="259dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/border2" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="75dp"
+        android:padding="16dp"
+        android:text="  Welcome to                         AMORASHOP!"
+        android:textColor="#020202"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/descriptionText"
+        android:layout_width="344dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleText"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="34dp"
+        android:padding="16dp"
+        android:text="AMORASHOP - Solusi Top-Up Game Cepat dan Aman
+Nikmati pengalaman top-up game yang praktis dan terpercaya hanya dalam genggaman tangan Anda! Dengan AMORASHOP, Anda dapat membeli mata uang dan item game favorit kapan saja, di mana saja."
+        android:textAlignment="center"
+        android:textColor="#0B0B0B"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/getStartedButton"
+        android:layout_width="210dp"
+        android:layout_height="76dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="170dp"
+        android:backgroundTint="#24B0C3"
+        android:padding="10dp"
+        android:text="Get Started"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+</RelativeLayout>

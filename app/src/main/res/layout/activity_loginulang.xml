@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".Loginulang">
+
+    <!-- Top Circle -->
+
+    <!-- Welcome Text -->
+
+    <!-- Email Input -->
+
+    <!-- Password Input -->
+
+    <!-- Forget Password Text -->
+
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="-15dp"
+        android:background="@drawable/border1" />
+
+    <ImageButton
+        android:id="@+id/backButton2"
+        android:layout_width="63dp"
+        android:layout_height="58dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="331dp"
+        android:backgroundTint="#AEE6E0"
+        android:contentDescription="Kembali2"
+        android:hint="@string/back_button_description"
+        android:src="@drawable/gambarback" />
+
+    <TextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="243dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="117dp"
+        android:layout_marginEnd="85dp"
+        android:text="Welcome Back!"
+        android:textColor="#141111"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="407dp"
+        android:layout_height="173dp"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="1dp"
+        android:src="@drawable/border3" />
+
+    <!-- Login Button -->
+
+    <!-- Register Text -->
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="322dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcomeTextView"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="45dp"
+        android:background="@drawable/gambarisiform"
+        android:hint="Enter your email"
+        android:padding="12dp" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emailEditText"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="45dp"
+        android:background="@drawable/gambarisiform"
+        android:hint="Confirm password"
+        android:padding="12dp" />
+
+    <TextView
+        android:id="@+id/forgetPasswordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/passwordEditText"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="248dp"
+        android:text="Forget Password?"
+        android:textColor="#009688" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="275dp"
+        android:layout_height="68dp"
+        android:layout_below="@id/forgetPasswordTextView"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="70dp"
+        android:backgroundTint="#24B0C3"
+        android:text="Login"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/registerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/loginButton"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="110dp"
+        android:text="Not have an account? Register"
+        android:textColor="#24B0C3" />
+
+</RelativeLayout>
