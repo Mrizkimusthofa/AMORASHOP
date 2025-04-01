@@ -1,10 +1,160 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MenuUtama">
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#8E24AA"
+        android:orientation="vertical">
+
+        <!-- TextView for the title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:fontFamily="@font/poppins_extrabold"
+            android:padding="16dp"
+            android:text="POPULER GAME"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <!-- GridLayout for images -->
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#8E24AA"
+            android:columnCount="3"
+            android:rowCount="6">
+
+            <!-- ImageView for each game -->
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game1" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game2" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="177dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game3" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game4" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game5" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game6" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game7" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game8" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game9" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game10" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game11" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game12" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game13" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game14" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game15" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game16" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game17" />
+
+            <ImageView
+                android:layout_width="145dp"
+                android:layout_height="175dp"
+                android:layout_margin="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/game18" />
+
+        </GridLayout>
+    </LinearLayout>
+</ScrollView>
