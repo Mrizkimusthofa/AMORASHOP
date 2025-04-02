@@ -1,19 +1,37 @@
 package com.example.amorashop;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Loginulang extends AppCompatActivity {
 
-    private EditText emailEditText, passwordEditText;
-    private Button loginButton;
-    private TextView forgetPasswordTextView, registerTextView;
+    EditText emailEditText, passwordEditText;
+    Button loginButton;
+    ImageButton backButton;
+    TextView forgetPasswordTextView, registerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +39,7 @@ public class Loginulang extends AppCompatActivity {
         setContentView(R.layout.activity_loginulang);
 
         // Initialize views
-        ImageButton backButton = findViewById(R.id.backButton2);
+        backButton = findViewById(R.id.backButton2);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
@@ -40,7 +58,10 @@ public class Loginulang extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle login logic here
+                Auth auth = new Auth();
+                auth.login(Loginulang.this, emailEditText.getText().toString(), passwordEditText.getText().toString());
+                Intent intent = new Intent(Loginulang.this, MenuUtama.class);
+                startActivity(intent);
             }
         });
 
