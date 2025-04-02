@@ -1,5 +1,6 @@
 package com.example.amorashop;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,6 +20,9 @@ public class Auth {
     String baseUrl =  "http://192.168.1.5/amora/public/";
     String loginUrl = baseUrl + "login";
     String registerUrl = baseUrl + "register";
+
+    private static final String SHARED_PREF_NAME = "com.amora.sharedpref_key";
+    private static final String KEY_SESSION = "session_key";
 
     public void register(Context context ,String name, String email, String password) {
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -67,9 +71,12 @@ public class Auth {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             String jsonMessage = jsonResponse.getString("message");
+                            String sessionKey = jsonResponse.getString("session_key");
 
                             Toast.makeText(context, jsonMessage,
                                     Toast.LENGTH_SHORT).show();
+
+                            saveSession(context, sessionKey);
 
                         } catch (JSONException e) {
                             Toast.makeText(context, "Login failed, email atau password salah!",
@@ -93,5 +100,26 @@ public class Auth {
             }
         };
         queue.add(stringRequest);
+    }
+
+
+//    Session Handle
+    public void saveSession(Context context, String sessionValue) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_SESSION, sessionValue);
+        editor.apply();
+    }
+
+    public String getSession(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_SESSION, null); // Returns null if not found
+    }
+
+    public void removeSession(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(KEY_SESSION);
+        editor.apply();
     }
 }

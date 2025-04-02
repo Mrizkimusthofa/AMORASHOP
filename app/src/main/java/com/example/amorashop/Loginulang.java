@@ -32,11 +32,20 @@ public class Loginulang extends AppCompatActivity {
     Button loginButton;
     ImageButton backButton;
     TextView forgetPasswordTextView, registerTextView;
+    Auth auth = new Auth();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginulang);
+
+//        Session Check
+        String sessionKey = auth.getSession(Loginulang.this);
+        if(sessionKey != null) {
+            Intent intent = new Intent(Loginulang.this, MenuUtama.class);
+            startActivity(intent);
+            finish(); // Optional: jika ingin menutup SecondActivity setelah kembali
+        }
 
         // Initialize views
         backButton = findViewById(R.id.backButton2);
@@ -58,8 +67,11 @@ public class Loginulang extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Auth auth = new Auth();
                 auth.login(Loginulang.this, emailEditText.getText().toString(), passwordEditText.getText().toString());
+
+                String sessionKey = auth.getSession(Loginulang.this);
+                Toast.makeText(Loginulang.this, "Session Key: " + sessionKey, Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(Loginulang.this, MenuUtama.class);
                 startActivity(intent);
             }

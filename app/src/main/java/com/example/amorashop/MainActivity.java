@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent untuk berpindah ke activity_registrasi
-                Intent intent = new Intent(MainActivity.this, Registrasi.class);
+                // Intent untuk berpindah ke activity_loginulang
+                Intent intent = new Intent(MainActivity.this, Loginulang.class);
                 startActivity(intent);
             }
         });
