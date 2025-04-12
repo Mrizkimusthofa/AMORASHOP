@@ -1,10 +1,13 @@
 package com.example.amorashop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,15 +27,18 @@ public class MenuTopUp extends AppCompatActivity {
         setContentView(R.layout.activity_menu_top_up);
 
         // Initialize UI components
-        initializeUIComponents();
+        initViews();
 
         // Setup UI components
         setupRecyclerView();
         setupPaymentGrid();
         setupBuyButton();
+
+//        Run Functions
+        playerIdEditText.setText(getGameId());
     }
 
-    private void initializeUIComponents() {
+    private void initViews() {
         playerIdEditText = findViewById(R.id.playerIdEditText);
         recyclerViewNominal = findViewById(R.id.recyclerViewNominal);
         paymentGrid = findViewById(R.id.paymentGrid);
@@ -73,5 +79,11 @@ public class MenuTopUp extends AppCompatActivity {
 
         // Implement API call or transaction logic here
         // Optionally handle promo logic based on promoApplied boolean
+    }
+
+    public String getGameId() {
+        Intent intent = getIntent();
+        String gameId = intent.getStringExtra("gameId");
+        return gameId;
     }
 }

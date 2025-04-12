@@ -63,19 +63,22 @@ public class MenuUtama extends AppCompatActivity {
 
 
 //        Run Functions
-        setClickListeners(btnGames);
+        sendGameId(btnGames);
 
 
     }
 
 //    Functions
-    public void setClickListeners(List<View> view) {
+    public void sendGameId(List<View> view) {
         for (View e : view) {
             e.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String id = v.getResources().getResourceEntryName(v.getId());
-                    Toast.makeText(MenuUtama.this, id, Toast.LENGTH_SHORT).show();
+                    String gameId = v.getResources().getResourceEntryName(v.getId());
+
+                    Intent intent = new Intent(MenuUtama.this, MenuTopUp.class);
+                    intent.putExtra("gameId", gameId);
+                    startActivity(intent);
                 }
             });
         }
