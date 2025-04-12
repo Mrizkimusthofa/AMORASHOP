@@ -1,15 +1,36 @@
 package com.example.amorashop;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Registrasi extends AppCompatActivity {
+
+    ImageButton backButton;
+    EditText fullNameInput, emailInput, passwordInput, confirmPasswordInput;
+    Button registerButton;
+    TextView loginLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,13 +38,13 @@ public class Registrasi extends AppCompatActivity {
         setContentView(R.layout.activity_registrasi);
 
         // Initialize views
-        ImageButton backButton = findViewById(R.id.backButton1);
-        EditText fullNameInput = findViewById(R.id.fullNameInput);
-        EditText emailInput = findViewById(R.id.emailInput);
-        EditText passwordInput = findViewById(R.id.passwordInput);
-        EditText confirmPasswordInput = findViewById(R.id.confirmPasswordInput);
-        Button registerButton = findViewById(R.id.registerButton);
-        TextView loginLink = findViewById(R.id.loginLink);
+        backButton = findViewById(R.id.backButton1);
+        fullNameInput = findViewById(R.id.fullNameInput);
+        emailInput = findViewById(R.id.emailInput);
+        passwordInput = findViewById(R.id.passwordInput);
+        confirmPasswordInput = findViewById(R.id.confirmPasswordInput);
+        registerButton = findViewById(R.id.registerButton);
+        loginLink = findViewById(R.id.loginLink);
 
         // Set back button listener
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -39,16 +60,19 @@ public class Registrasi extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fullName = fullNameInput.getText().toString().trim();
-                String email = emailInput.getText().toString().trim();
-                String password = passwordInput.getText().toString().trim();
-                String confirmPassword = confirmPasswordInput.getText().toString().trim();
 
                 // Add your registration logic here (e.g., validation, API call, etc.)
-                if (password.equals(confirmPassword)) {
-                    // Continue with registration
+                if (passwordInput.getText().toString().trim().length() < 8) {
+                    Toast.makeText(Registrasi.this, "Password harus lebih dari 8 karakter!", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Show error message (e.g., Toast)
+                    if (passwordInput.getText().toString().equals(confirmPasswordInput.getText().toString())) {
+                        Auth auth = new Auth();
+                        auth.register(Registrasi.this, fullNameInput.getText().toString().trim(), emailInput.getText().toString().trim(), passwordInput.getText().toString().trim());
+                        Intent intent = new Intent(Registrasi.this, MenuUtama.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(Registrasi.this, "Password dan Confirm Password tidak cocok!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
