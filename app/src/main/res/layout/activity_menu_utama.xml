@@ -145,6 +145,7 @@
                 android:src="@drawable/game14" />
 
             <ImageView
+                android:id="@+id/hsr"
                 android:layout_width="127dp"
                 android:layout_height="175dp"
                 android:layout_margin="4dp"

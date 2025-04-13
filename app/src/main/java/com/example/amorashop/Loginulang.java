@@ -69,7 +69,6 @@ public class Loginulang extends AppCompatActivity {
             public void onClick(View v) {
                 auth.login(Loginulang.this, emailEditText.getText().toString(), passwordEditText.getText().toString());
 
-                String sessionKey = auth.getSession(Loginulang.this);
                 Toast.makeText(Loginulang.this, "Session Key: " + sessionKey, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(Loginulang.this, MenuUtama.class);
