@@ -14,6 +14,7 @@ import java.util.List;
 public class MenuUtama extends AppCompatActivity {
     ImageView ml, ff, gi, hok, pubg, valo, cod, eafc, mc, sg, sos, lol, aov, lolw, ss, rm, zzz, hsr;
     List btnGames = new ArrayList<>();
+    MTUDynamicLayout mtudl = new MTUDynamicLayout();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +77,11 @@ public class MenuUtama extends AppCompatActivity {
                 public void onClick(View v) {
                     String gameId = v.getResources().getResourceEntryName(v.getId());
 
-                    Intent intent = new Intent(MenuUtama.this, MenuTopUp.class);
-                    intent.putExtra("gameId", gameId);
-                    startActivity(intent);
+                    mtudl.getLayout(MenuUtama.this, gameId);
+
+//                    Intent intent = new Intent(MenuUtama.this, MTUDynamicLayout.class);
+//                    intent.putExtra("gameId", gameId);
+//                    startActivity(intent);
                 }
             });
         }

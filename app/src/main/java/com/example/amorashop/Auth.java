@@ -20,6 +20,7 @@ public class Auth {
     String baseUrl =  "http://192.168.1.5/amora/public/";
     String loginUrl = baseUrl + "login";
     String registerUrl = baseUrl + "register";
+    String layoutUrl = baseUrl + "layout/";
 
     private static final String SHARED_PREF_NAME = "com.amora.sharedpref_key";
     private static final String KEY_SESSION = "session_key";

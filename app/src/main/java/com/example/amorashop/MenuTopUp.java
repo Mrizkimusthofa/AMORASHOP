@@ -9,8 +9,13 @@ import android.widget.GridLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 public class MenuTopUp extends AppCompatActivity {
 
@@ -20,11 +25,20 @@ public class MenuTopUp extends AppCompatActivity {
     private GridLayout paymentGrid;
     private CheckBox promoCheckBox;
     private Button buyButton;
+    private List<MyDataItem> data;
+    private RVAdapter adapter;
+
+    Funcs funcs = new Funcs();
+    List<String> numOfItemsList, itemImagesList, itemPricesList;
+    String itemName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_top_up);
+
+//        Get Intent Data
+        getIntentData();
 
         // Initialize UI components
         initViews();
@@ -35,7 +49,6 @@ public class MenuTopUp extends AppCompatActivity {
         setupBuyButton();
 
 //        Run Functions
-        playerIdEditText.setText(getGameId());
     }
 
     private void initViews() {
@@ -48,9 +61,24 @@ public class MenuTopUp extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        recyclerViewNominal.setLayoutManager(new LinearLayoutManager(this));
+//        recyclerViewNominal.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerViewNominal.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         // Set the adapter for the RecyclerView (implement adapter class)
         // recyclerViewNominal.setAdapter(new YourAdapter());
+
+        data = new ArrayList<>();
+
+        for (int i = 0; i < numOfItemsList.size(); i++) {
+            data.add(new MyDataItem(numOfItemsList.get(i)+" "+funcs.toCapitalized(itemName), "Rp. "+itemPricesList.get(i), itemImagesList.get(i)));
+        }
+
+//        data.add(new MyDataItem("5 Diamond","Rp. 10.000","https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/150x150/10_MLBB_NewDemom.png"));
+//        data.add(new MyDataItem("59 Diamond", "Rp. 21.000", "https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/150x150/50_MLBB_NewDemom.png"));
+//        data.add(new MyDataItem("17 Diamond", "Rp. 43.000","https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/150x150/150x250_MLBB_NewDemom.png"));
+
+        adapter = new RVAdapter(this, data);
+        recyclerViewNominal.setAdapter(adapter);
     }
 
     private void setupPaymentGrid() {
@@ -81,9 +109,15 @@ public class MenuTopUp extends AppCompatActivity {
         // Optionally handle promo logic based on promoApplied boolean
     }
 
-    public String getGameId() {
+    public void getIntentData() {
         Intent intent = getIntent();
-        String gameId = intent.getStringExtra("gameId");
-        return gameId;
+        String[] numOfItemsArray = intent.getStringArrayExtra("numOfItems");
+        String[] itemImagesArray = intent.getStringArrayExtra("itemImages");
+        String[] itemPricesArray = intent.getStringArrayExtra("itemPrices");
+        itemName = intent.getStringExtra("itemName");
+
+        numOfItemsList = Arrays.asList(numOfItemsArray);
+        itemImagesList = Arrays.asList(itemImagesArray);
+        itemPricesList = Arrays.asList(itemPricesArray);
     }
 }
