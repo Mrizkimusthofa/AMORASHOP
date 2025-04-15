@@ -70,7 +70,7 @@ public class MenuTopUp extends AppCompatActivity {
         data = new ArrayList<>();
 
         for (int i = 0; i < numOfItemsList.size(); i++) {
-            data.add(new MyDataItem(numOfItemsList.get(i)+" "+funcs.toCapitalized(itemName), "Rp. "+itemPricesList.get(i), itemImagesList.get(i)));
+            data.add(new MyDataItem(numOfItemsList.get(i)+" "+funcs.toCapitalized(itemName), funcs.formatIdr(itemPricesList.get(i)), itemImagesList.get(i)));
         }
 
 //        data.add(new MyDataItem("5 Diamond","Rp. 10.000","https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/150x150/10_MLBB_NewDemom.png"));
