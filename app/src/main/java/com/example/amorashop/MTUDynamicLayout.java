@@ -32,8 +32,9 @@ public class MTUDynamicLayout {
     List<String> numOfItemsList = new ArrayList<>();
     List<String> itemImagesList = new ArrayList<>();
     List<String> itemPricesList = new ArrayList<>();
+    List<String> itemNamesList = new ArrayList<>();
 
-    String[] numOfItemsArray, itemImagesArray, itemPricesArray, itemTypesArray;
+    String[] numOfItemsArray, itemImagesArray, itemPricesArray, itemNamesArray;
 
 
 //    List<String> intentDataList = new ArrayList<>();
@@ -54,13 +55,13 @@ public class MTUDynamicLayout {
                             JSONObject jsonLayoutObject = jsonLayout.getJSONObject(0);
 //                            Get Data on specific object key (String)
                             layoutType = jsonLayoutObject.getString("layout_type");
-                            itemName = jsonLayoutObject.getString("item_name");
 
                             for (int i = 0; i < jsonLayout.length(); i++) {
                                 JSONObject layoutObj = jsonLayout.getJSONObject(i);
                                 numOfItemsList.add(layoutObj.getString("item_amounts"));
                                 itemImagesList.add(layoutObj.getString("item_image"));
                                 itemPricesList.add(layoutObj.getString("item_price"));
+                                itemNamesList.add(layoutObj.getString("item_name"));
 
 //                                Get All Rows Data
 //                                JSONObject jsonLayoutItem = jsonLayout.getJSONObject(i);
@@ -76,11 +77,12 @@ public class MTUDynamicLayout {
                                 numOfItemsArray = numOfItemsList.toArray(new String[0]);
                                 itemImagesArray = itemImagesList.toArray(new String[0]);
                                 itemPricesArray = itemPricesList.toArray(new String[0]);
+                                itemNamesArray = itemNamesList.toArray(new String[0]);
                                 Intent intent = new Intent(context, MenuTopUp.class);
                                 intent.putExtra("numOfItems", numOfItemsArray);
                                 intent.putExtra("itemImages", itemImagesArray);
                                 intent.putExtra("itemPrices", itemPricesArray);
-                                intent.putExtra("itemName", itemName);
+                                intent.putExtra("itemNames", itemNamesArray);
 
                                 context.startActivity(intent);
                             } else {

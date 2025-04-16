@@ -29,8 +29,7 @@ public class MenuTopUp extends AppCompatActivity {
     private RVAdapter adapter;
 
     Funcs funcs = new Funcs();
-    List<String> numOfItemsList, itemImagesList, itemPricesList;
-    String itemName;
+    List<String> numOfItemsList, itemImagesList, itemPricesList, itemNamesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +69,11 @@ public class MenuTopUp extends AppCompatActivity {
         data = new ArrayList<>();
 
         for (int i = 0; i < numOfItemsList.size(); i++) {
-            data.add(new MyDataItem(numOfItemsList.get(i)+" "+funcs.toCapitalized(itemName), funcs.formatIdr(itemPricesList.get(i)), itemImagesList.get(i)));
+            if (numOfItemsList.get(i).equals("1")) {
+                data.add(new MyDataItem(itemNamesList.get(i), funcs.formatIdr(itemPricesList.get(i)), itemImagesList.get(i)));
+                continue;
+            }
+            data.add(new MyDataItem(numOfItemsList.get(i)+" "+itemNamesList.get(i), funcs.formatIdr(itemPricesList.get(i)), itemImagesList.get(i)));
         }
 
 //        data.add(new MyDataItem("5 Diamond","Rp. 10.000","https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/150x150/10_MLBB_NewDemom.png"));
@@ -114,10 +117,11 @@ public class MenuTopUp extends AppCompatActivity {
         String[] numOfItemsArray = intent.getStringArrayExtra("numOfItems");
         String[] itemImagesArray = intent.getStringArrayExtra("itemImages");
         String[] itemPricesArray = intent.getStringArrayExtra("itemPrices");
-        itemName = intent.getStringExtra("itemName");
+        String[] itemNamesArray = intent.getStringArrayExtra("itemNames");
 
         numOfItemsList = Arrays.asList(numOfItemsArray);
         itemImagesList = Arrays.asList(itemImagesArray);
         itemPricesList = Arrays.asList(itemPricesArray);
+        itemNamesList = Arrays.asList(itemNamesArray);
     }
 }
