@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuUtama extends AppCompatActivity {
-    ImageView ml, ff, gi, hok, pubg, valo, cod, eafc, mc, sg, sos, lol, aov, lolw, ss, rm, zzz, hsr;
+    ImageView mlbb, ff, gi, hok, pubgm, valo, codm, eafc, mcgg, sg, sos, lol, aov, lolw, ss, rm, zzz, hsr;
     List btnGames = new ArrayList<>();
     MTUDynamicLayout mtudl = new MTUDynamicLayout();
 
@@ -23,35 +23,35 @@ public class MenuUtama extends AppCompatActivity {
 
 
 //          Init Views
-        ml = findViewById(R.id.ml);
+        mlbb = findViewById(R.id.mlbb);
         ff = findViewById(R.id.ff);
-        gi = findViewById(R.id.gensin);
+        gi = findViewById(R.id.gi);
         hok = findViewById(R.id.hok);
-        pubg = findViewById(R.id.pubg);
-        valo = findViewById(R.id.valorant);
-        cod = findViewById(R.id.cod);
-        eafc = findViewById(R.id.easports);
-        mc = findViewById(R.id.mcgogo);
-        sg = findViewById(R.id.stumble);
-        sos = findViewById(R.id.stateofsurvival);
+        pubgm = findViewById(R.id.pubgm);
+        valo = findViewById(R.id.valo);
+        codm = findViewById(R.id.codm);
+        eafc = findViewById(R.id.eafc);
+        mcgg = findViewById(R.id.mcgg);
+        sg = findViewById(R.id.sg);
+        sos = findViewById(R.id.sos);
         lol = findViewById(R.id.lol);
         aov = findViewById(R.id.aov);
-        lolw = findViewById(R.id.lolwildrift);
-        ss = findViewById(R.id.supersus);
-        rm = findViewById(R.id.racingmaster);
-        zzz = findViewById(R.id.zenlesszonezero);
+        lolw = findViewById(R.id.lolw);
+        ss = findViewById(R.id.ss);
+        rm = findViewById(R.id.rm);
+        zzz = findViewById(R.id.zzz);
         hsr = findViewById(R.id.hsr);
 
 //        Assign views to List
-        btnGames.add(ml);
+        btnGames.add(mlbb);
         btnGames.add(ff);
         btnGames.add(gi);
         btnGames.add(hok);
-        btnGames.add(pubg);
+        btnGames.add(pubgm);
         btnGames.add(valo);
-        btnGames.add(cod);
+        btnGames.add(codm);
         btnGames.add(eafc);
-        btnGames.add(mc);
+        btnGames.add(mcgg);
         btnGames.add(sg);
         btnGames.add(sos);
         btnGames.add(lol);

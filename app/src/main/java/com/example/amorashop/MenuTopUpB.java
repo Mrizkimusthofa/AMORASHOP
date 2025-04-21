@@ -6,7 +6,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,9 +14,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-public class MenuTopUp extends AppCompatActivity {
+public class MenuTopUpB extends AppCompatActivity {
 
     // Declare UI components
     private EditText playerIdEditText, emailEditText;
@@ -34,7 +32,7 @@ public class MenuTopUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_top_up);
+        setContentView(R.layout.activity_menu_top_up_b);
 
 //        Get Intent Data
         getIntentData();

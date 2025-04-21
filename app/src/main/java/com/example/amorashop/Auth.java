@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Auth {
-    String baseUrl =  "http://192.168.1.5/amora/public/";
+    String baseUrl =  "http://192.168.1.7/amora/public/";
     String loginUrl = baseUrl + "login";
     String registerUrl = baseUrl + "register";
     String layoutUrl = baseUrl + "layout/";

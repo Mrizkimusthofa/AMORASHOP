@@ -16,10 +16,22 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".WebViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".KonfirmasiPembayaran"
             android:exported="false" />
         <activity
-            android:name=".MenuTopUp"
+            android:name=".MenuTopUpA"
+            android:exported="false" />
+        <activity
+            android:name=".MenuTopUpB"
+            android:exported="false" />
+        <activity
+            android:name=".MenuTopUpC"
+            android:exported="false" />
+        <activity
+            android:name=".MenuTopUpD"
             android:exported="false" />
         <activity
             android:name=".MenuUtama"
