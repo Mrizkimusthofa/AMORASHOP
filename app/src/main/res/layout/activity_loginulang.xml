@@ -85,6 +85,8 @@
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
         android:hint="Enter your email"
+        android:drawableLeft="@drawable/ic_email"
+        android:drawablePadding="10dp"
         android:padding="12dp" />
 
     <EditText
@@ -98,7 +100,9 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
-        android:hint="Confirm password"
+        android:hint="Password"
+        android:drawableLeft="@drawable/ic_password"
+        android:drawablePadding="10dp"
         android:padding="12dp" />
 
     <TextView
