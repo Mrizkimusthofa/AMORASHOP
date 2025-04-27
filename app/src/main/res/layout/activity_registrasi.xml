@@ -87,8 +87,6 @@
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
         android:hint="Enter your full name"
-        android:drawableLeft="@drawable/ic_account"
-        android:drawablePadding="10dp"
         android:padding="16dp"
         android:textColorHighlight="#000000" />
 
@@ -104,8 +102,6 @@
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
         android:hint="Enter your email"
-        android:drawableLeft="@drawable/ic_email"
-        android:drawablePadding="10dp"
         android:padding="16dp" />
 
     <EditText
@@ -120,8 +116,6 @@
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
         android:hint="Create password"
-        android:drawableLeft="@drawable/ic_password"
-        android:drawablePadding="10dp"
         android:inputType="textPassword"
         android:padding="16dp" />
 
@@ -137,8 +131,6 @@
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
         android:hint="Confirm password"
-        android:drawableLeft="@drawable/ic_password"
-        android:drawablePadding="10dp"
         android:inputType="textPassword"
         android:padding="16dp" />
 
