@@ -78,7 +78,7 @@
         android:drawablePadding="8dp"
         android:hint="Enter your full name"
         android:padding="16dp"
-        android:textColorHighlight="#00#4D06420000"
+        android:textColorHighlight="#000000"
         android:textColorHint="#4D0642"
         android:textSize="18sp" />
 
