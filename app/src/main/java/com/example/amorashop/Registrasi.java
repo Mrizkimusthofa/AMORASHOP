@@ -3,6 +3,8 @@ package com.example.amorashop;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +33,8 @@ public class Registrasi extends AppCompatActivity {
     EditText fullNameInput, emailInput, passwordInput, confirmPasswordInput;
     Button registerButton;
     TextView loginLink;
+    boolean isPasswordVisible = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +50,43 @@ public class Registrasi extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         loginLink = findViewById(R.id.loginLink);
 
-        // Set back button listener
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Registrasi.this, MainActivity.class);
-                startActivity(intent);
-                finish(); // Optional: jika ingin menutup SecondActivity setelah kembali
+        setupPasswordVisibilityToggle(passwordInput);
+        setupPasswordVisibilityToggle(confirmPasswordInput);
+    }
+    private void setupPasswordVisibilityToggle(EditText editText) {
+        editText.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_END = 2; // Index untuk drawableEnd (mata)
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (editText.getRight() - editText.getCompoundDrawables()[DRAWABLE_END].getBounds().width())) {
+                    // Toggle visible/invisible password
+                    if (isPasswordVisible) {
+                        editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        editText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.key_24, 0, R.drawable.ic_eye_closed, 0);
+                    } else {
+                        editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                        editText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.key_24, 0, R.drawable.ic_eye_open, 0);
+                    }
+                    isPasswordVisible = !isPasswordVisible;
+
+                    // Tetap menjaga posisi cursor di akhir teks
+                    editText.setSelection(editText.getText().length());
+                    v.performClick();
+
+                    return true;
+                }
             }
+            return false;
+        });
+
+    // Set back button listener
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Registrasi.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         // Set register button listener
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        registerButton.setOnClickListener(v -> {
 
                 // Add your registration logic here (e.g., validation, API call, etc.)
                 if (passwordInput.getText().toString().trim().length() < 8) {
@@ -74,17 +101,12 @@ public class Registrasi extends AppCompatActivity {
                         Toast.makeText(Registrasi.this, "Password dan Confirm Password tidak cocok!", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
         });
 
         // Set login link listener
-        loginLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to login activity
+        loginLink.setOnClickListener(v -> {
                 Intent intent = new Intent(Registrasi.this, Loginulang.class);
                 startActivity(intent);
-            }
         });
     }
 }
