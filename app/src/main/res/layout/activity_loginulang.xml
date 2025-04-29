@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@drawable/background"
     tools:context=".Loginulang">
 
     <!-- Top Circle -->
@@ -18,15 +18,6 @@
     <!-- Forget Password Text -->
 
 
-    <View
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="false"
-        android:layout_marginStart="-3dp"
-        android:layout_marginTop="-15dp"
-        android:background="@drawable/border1" />
-
     <ImageButton
         android:id="@+id/backButton2"
         android:layout_width="63dp"
@@ -37,10 +28,10 @@
         android:layout_marginStart="21dp"
         android:layout_marginTop="31dp"
         android:layout_marginEnd="331dp"
-        android:backgroundTint="#AEE6E0"
+        android:backgroundTint="#4D0642"
         android:contentDescription="Kembali2"
         android:hint="@string/back_button_description"
-        android:src="@drawable/gambarback" />
+        android:src="@drawable/arrow_back" />
 
     <TextView
         android:id="@+id/welcomeTextView"
@@ -53,7 +44,7 @@
         android:layout_marginTop="117dp"
         android:layout_marginEnd="85dp"
         android:text="Welcome Back!"
-        android:textColor="#141111"
+        android:textColor="#ffffff"
         android:textSize="34sp"
         android:textStyle="bold" />
 
@@ -67,7 +58,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="212dp"
         android:layout_marginEnd="1dp"
-        android:src="@drawable/border3" />
+        android:src="@drawable/logo_login" />
 
     <!-- Login Button -->
 
@@ -84,10 +75,11 @@
         android:layout_marginTop="240dp"
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
+        android:drawableLeft="@drawable/email_24"
+        android:drawablePadding="8dp"
         android:hint="Enter your email"
-        android:drawableLeft="@drawable/ic_email"
-        android:drawablePadding="10dp"
-        android:padding="12dp" />
+        android:textColorHint="#4D0642"
+        android:padding="16dp" />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -100,10 +92,11 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
+        android:drawableLeft="@drawable/key_24"
+        android:drawablePadding="8dp"
         android:hint="Password"
-        android:drawableLeft="@drawable/ic_password"
-        android:drawablePadding="10dp"
-        android:padding="12dp" />
+        android:textColorHint="#4D0642"
+        android:padding="16dp" />
 
     <TextView
         android:id="@+id/forgetPasswordTextView"
@@ -116,21 +109,20 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="248dp"
         android:text="Forget Password?"
-        android:textColor="#009688" />
+        android:textColor="#ffffff" />
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="275dp"
-        android:layout_height="68dp"
+        android:layout_width="182dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/forgetPasswordTextView"
         android:layout_alignParentStart="false"
         android:layout_alignParentEnd="false"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="70dp"
-        android:backgroundTint="#24B0C3"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#FFFFFF"
         android:text="Login"
-        android:textColor="#FFFFFF"
+        android:textColor="#4D0642"
         android:textSize="20sp" />
 
     <TextView
@@ -144,6 +136,6 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="110dp"
         android:text="Not have an account? Register"
-        android:textColor="#24B0C3" />
+        android:textColor="#FFFFFF" />
 
 </RelativeLayout>

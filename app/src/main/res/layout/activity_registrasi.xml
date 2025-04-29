@@ -29,10 +29,10 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="23dp"
         android:layout_marginEnd="340dp"
-        android:backgroundTint="#420140"
+        android:backgroundTint="#4D0642"
         android:contentDescription="Kembali1"
         android:hint="@string/back_button_description"
-        android:src="@drawable/gambarback" />
+        android:src="@drawable/arrow_back" />
 
     <TextView
         android:id="@+id/titleText"
@@ -71,10 +71,10 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentEnd="false"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
-        android:drawableLeft="@drawable/baseline_name"
+        android:drawableLeft="@drawable/person_24"
         android:drawablePadding="8dp"
         android:hint="Enter your full name"
         android:padding="16dp"
@@ -93,11 +93,11 @@
         android:layout_marginTop="13dp"
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
-        android:drawableLeft="@drawable/baseline_email_24"
+        android:drawableLeft="@drawable/email_24"
         android:drawablePadding="8dp"
         android:hint="Enter your email"
-        android:textColorHint="#4D0642"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:textColorHint="#4D0642" />
 
     <EditText
         android:id="@+id/passwordInput"
@@ -110,12 +110,13 @@
         android:layout_marginTop="13dp"
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
-        android:drawableLeft="@drawable/baseline_key_24"
+        android:drawableStart="@drawable/key_24"
+        android:drawableEnd="@drawable/ic_eye_closed"
         android:drawablePadding="8dp"
         android:hint="Create password"
         android:inputType="textPassword"
-        android:textColorHint="#4D0642"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:textColorHint="#4D0642" />
 
     <EditText
         android:id="@+id/confirmPasswordInput"
@@ -125,27 +126,27 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentEnd="false"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="45dp"
         android:background="@drawable/gambarisiform"
-        android:drawableLeft="@drawable/baseline_key_24"
+        android:drawableStart="@drawable/key_24"
+        android:drawableEnd="@drawable/ic_eye_closed"
         android:drawablePadding="8dp"
         android:hint="Confirm password"
         android:inputType="textPassword"
-        android:textColorHint="#4D0642"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:textColorHint="#4D0642" />
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="321dp"
+        android:layout_width="182dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/confirmPasswordInput"
         android:layout_alignParentStart="false"
         android:layout_alignParentEnd="false"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="80dp"
-        android:backgroundTint="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#FFFFFF"
         android:padding="16dp"
         android:text="Register"
         android:textColor="#4D0642"
@@ -159,6 +160,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/shape3" />
+
 
     <TextView
         android:id="@+id/loginLink"
