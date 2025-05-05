@@ -67,12 +67,16 @@ public class Loginulang extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (emailEditText.getText().toString().isEmpty() || passwordEditText.getText().toString().isEmpty()) {
+                    Toast.makeText(Loginulang.this, "Input field cannot be empty!", Toast.LENGTH_SHORT).show();
+                    return;
+                };
                 auth.login(Loginulang.this, emailEditText.getText().toString(), passwordEditText.getText().toString());
 
-                Toast.makeText(Loginulang.this, "Session Key: " + sessionKey, Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(Loginulang.this, MenuUtama.class);
-                startActivity(intent);
+//                Toast.makeText(Loginulang.this, "Session Key: " + sessionKey, Toast.LENGTH_SHORT).show();
+//
+//                Intent intent = new Intent(Loginulang.this, MenuUtama.class);
+//                startActivity(intent);
             }
         });
 

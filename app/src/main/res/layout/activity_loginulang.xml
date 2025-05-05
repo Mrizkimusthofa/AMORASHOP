@@ -95,8 +95,9 @@
         android:drawableLeft="@drawable/key_24"
         android:drawablePadding="8dp"
         android:hint="Password"
-        android:textColorHint="#4D0642"
-        android:padding="16dp" />
+        android:inputType="text|textPassword|textCapWords"
+        android:padding="16dp"
+        android:textColorHint="#4D0642" />
 
     <TextView
         android:id="@+id/forgetPasswordTextView"

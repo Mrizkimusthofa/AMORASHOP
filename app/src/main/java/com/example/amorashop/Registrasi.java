@@ -1,5 +1,6 @@
 package com.example.amorashop;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
@@ -53,6 +54,7 @@ public class Registrasi extends AppCompatActivity {
         setupPasswordVisibilityToggle(passwordInput);
         setupPasswordVisibilityToggle(confirmPasswordInput);
     }
+    @SuppressLint("ClickableViewAccessibility")
     private void setupPasswordVisibilityToggle(EditText editText) {
         editText.setOnTouchListener((v, event) -> {
             final int DRAWABLE_END = 2; // Index untuk drawableEnd (mata)
