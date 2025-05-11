@@ -2,10 +2,14 @@ package com.example.amorashop;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,16 +22,18 @@ import java.util.List;
 public class MenuTopUpA extends AppCompatActivity {
 
     // Declare UI components
-    private EditText playerIdEditText, emailEditText;
+    private EditText playerIdEditText, emailEditText, zonaIdEditText;
     private RecyclerView recyclerViewNominal;
     private GridLayout paymentGrid;
     private CheckBox promoCheckBox;
-    private Button buyButton;
+    private Button buyButton, btnCheckUsername;
+    private TextView tvUsername;
     private List<MyDataItem> data;
     private RVAdapter adapter;
 
     Funcs funcs = new Funcs();
     List<String> numOfItemsList, itemImagesList, itemPricesList, itemNamesList;
+    String gameId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,11 @@ public class MenuTopUpA extends AppCompatActivity {
 
 //        Get Intent Data
         getIntentData();
+        for (int i = 0; i < funcs.gameIdLists.length; i++) {
+            if(funcs.gameIdLists[i].equals(gameId)) {
+                funcs.params = funcs.gameUrlParams[i];
+            }
+        }
 
         // Initialize UI components
         initViews();
@@ -46,15 +57,50 @@ public class MenuTopUpA extends AppCompatActivity {
         setupBuyButton();
 
 //        Run Functions
+        getUsername();
     }
 
     private void initViews() {
         playerIdEditText = findViewById(R.id.playerIdEditText);
+        zonaIdEditText = findViewById(R.id.ZonaID);
         recyclerViewNominal = findViewById(R.id.recyclerViewNominal);
         paymentGrid = findViewById(R.id.paymentGrid);
         promoCheckBox = findViewById(R.id.promoCheckBox);
         emailEditText = findViewById(R.id.emailEditText);
         buyButton = findViewById(R.id.buyButton);
+        tvUsername = findViewById(R.id.tvUsername);
+        btnCheckUsername = findViewById(R.id.btnCheckUsername);
+    }
+
+    private void getUsername() {
+        btnCheckUsername.setOnClickListener(v -> {
+            String playerId = playerIdEditText.getText().toString().trim();
+            String zonaId = zonaIdEditText.getText().toString().trim();
+            if (playerId.isEmpty()) {
+                playerIdEditText.setError("Player ID is required");
+                return;
+            } else if (zonaId.isEmpty()) {
+                zonaIdEditText.setError("Zona ID is required");
+                return;
+            }
+            funcs.getUsernameA(this, playerId, zonaId, new Funcs.UsernameCallback() {
+                @Override
+                public void onUsernameReceived(String username) {
+                    // This code will run when the username is ready
+                    runOnUiThread(() -> {
+                        tvUsername.setText(username);
+                    });
+                }
+
+                @Override
+                public void onError(String e) {
+                    // Handle error here
+                    runOnUiThread(() -> {
+                        tvUsername.setText("User not found!");
+                    });
+                }
+            });
+        });
     }
 
     private void setupRecyclerView() {
@@ -116,6 +162,7 @@ public class MenuTopUpA extends AppCompatActivity {
         String[] itemImagesArray = intent.getStringArrayExtra("itemImages");
         String[] itemPricesArray = intent.getStringArrayExtra("itemPrices");
         String[] itemNamesArray = intent.getStringArrayExtra("itemNames");
+        gameId = intent.getStringExtra("gameId");
 
         numOfItemsList = Arrays.asList(numOfItemsArray);
         itemImagesList = Arrays.asList(itemImagesArray);

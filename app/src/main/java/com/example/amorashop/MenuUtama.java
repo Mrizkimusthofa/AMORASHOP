@@ -91,6 +91,7 @@ public class MenuUtama extends AppCompatActivity {
                     String gameId = v.getResources().getResourceEntryName(v.getId());
 
                     mtudl.getLayout(MenuUtama.this, gameId);
+                    
 
 //                    Intent intent = new Intent(MenuUtama.this, MTUDynamicLayout.class);
 //                    intent.putExtra("gameId", gameId);

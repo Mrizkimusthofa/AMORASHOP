@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,12 +28,15 @@ public class MenuTopUpC extends AppCompatActivity {
     private RecyclerView recyclerViewNominal;
     private Spinner spinServer;
     private CheckBox promoCheckBox;
-    private Button buyButton;
+    private Button buyButton, btnCheckUsername;
+    private TextView tvUsername;
     private List<MyDataItem> data;
     private RVAdapter adapter;
 
     Funcs funcs = new Funcs();
     List<String> numOfItemsList, itemImagesList, itemPricesList, itemNamesList;
+    String gameId;
+    String accServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,11 @@ public class MenuTopUpC extends AppCompatActivity {
 
 //        Get Intent Data
         getIntentData();
+        for (int i = 0; i < funcs.gameIdLists.length; i++) {
+            if(funcs.gameIdLists[i].equals(gameId)) {
+                funcs.params = funcs.gameUrlParams[i];
+            }
+        }
 
         // Initialize UI components
         initViews();
@@ -52,6 +61,7 @@ public class MenuTopUpC extends AppCompatActivity {
 
 //        Run Functions
         spinServerFunc();
+        getUsername();
 
     }
 
@@ -62,6 +72,35 @@ public class MenuTopUpC extends AppCompatActivity {
         promoCheckBox = findViewById(R.id.promoCheckBox);
         emailEditText = findViewById(R.id.emailEditText);
         buyButton = findViewById(R.id.buyButton);
+        btnCheckUsername = findViewById(R.id.btnCheckUsername);
+        tvUsername = findViewById(R.id.tvUsername);
+    }
+
+    private void getUsername() {
+        btnCheckUsername.setOnClickListener(v -> {
+            String playerId = playerIdEditText.getText().toString().trim();
+            if (playerId.isEmpty()) {
+                playerIdEditText.setError("Player ID is required");
+                return;
+            }
+            funcs.getUsernameC(this, playerId, new Funcs.UsernameCallback() {
+                @Override
+                public void onUsernameReceived(String username) {
+                    // This code will run when the username is ready
+                    runOnUiThread(() -> {
+                        tvUsername.setText(username);
+                    });
+                }
+
+                @Override
+                public void onError(String e) {
+                    // Handle error here
+                    runOnUiThread(() -> {
+                        tvUsername.setText("User not found!");
+                    });
+                }
+            });
+        });
     }
 
     private void setupRecyclerView() {
@@ -119,6 +158,7 @@ public class MenuTopUpC extends AppCompatActivity {
         String[] itemImagesArray = intent.getStringArrayExtra("itemImages");
         String[] itemPricesArray = intent.getStringArrayExtra("itemPrices");
         String[] itemNamesArray = intent.getStringArrayExtra("itemNames");
+        gameId = intent.getStringExtra("gameId");
 
         numOfItemsList = Arrays.asList(numOfItemsArray);
         itemImagesList = Arrays.asList(itemImagesArray);
@@ -141,9 +181,14 @@ public class MenuTopUpC extends AppCompatActivity {
         spinServer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = items.get(position);
-                Toast.makeText(MenuTopUpC.this, "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+                accServer = items.get(position);
                 // Do something with the selected item
+                for (int i = 0; i < funcs.accServers.length; i++) {
+                    if(funcs.accServers[i].equals(items.get(position))) {
+                        funcs.accServer = funcs.accServers[i].toLowerCase();
+                        System.out.println("in for manu topup c says: "+funcs.accServers[i]);
+                    }
+                }
             }
 
             @Override

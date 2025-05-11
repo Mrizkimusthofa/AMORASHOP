@@ -85,13 +85,13 @@ public class MTUDynamicLayout {
                                 return;
                             }
                             if (layoutType.equals("a")) {
-                                layoutSwitch(context, MenuTopUpA.class);
+                                layoutSwitch(context, MenuTopUpA.class, id);
                             } else if (layoutType.equals("b")) {
-                                layoutSwitch(context, MenuTopUpB.class);
+                                layoutSwitch(context, MenuTopUpB.class, id);
                             } else if (layoutType.equals("c")) {
-                                layoutSwitch(context, MenuTopUpC.class);
+                                layoutSwitch(context, MenuTopUpC.class, id);
                             } else if (layoutType.equals("d")) {
-                                layoutSwitch(context, MenuTopUpD.class);
+                                layoutSwitch(context, MenuTopUpD.class, id);
                             } else {
                                 Toast.makeText(context, "Layout type not found!", Toast.LENGTH_SHORT).show();
                             }
@@ -112,7 +112,7 @@ public class MTUDynamicLayout {
         queue.add(stringRequest);
     }
 
-    public void layoutSwitch(Context context, Object layoutActivity) {
+    public void layoutSwitch(Context context, Object layoutActivity, String id) {
         numOfItemsArray = numOfItemsList.toArray(new String[0]);
         itemImagesArray = itemImagesList.toArray(new String[0]);
         itemPricesArray = itemPricesList.toArray(new String[0]);
@@ -122,6 +122,7 @@ public class MTUDynamicLayout {
         intent.putExtra("itemImages", itemImagesArray);
         intent.putExtra("itemPrices", itemPricesArray);
         intent.putExtra("itemNames", itemNamesArray);
+        intent.putExtra("gameId", id);
         context.startActivity(intent);
     }
 }

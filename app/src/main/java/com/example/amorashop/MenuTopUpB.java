@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,12 +23,14 @@ public class MenuTopUpB extends AppCompatActivity {
     private RecyclerView recyclerViewNominal;
     private GridLayout paymentGrid;
     private CheckBox promoCheckBox;
-    private Button buyButton;
+    private Button buyButton, btnCheckUsername;
+    private TextView tvUsername;
     private List<MyDataItem> data;
     private RVAdapter adapter;
 
     Funcs funcs = new Funcs();
     List<String> numOfItemsList, itemImagesList, itemPricesList, itemNamesList;
+    String gameId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,11 @@ public class MenuTopUpB extends AppCompatActivity {
 
 //        Get Intent Data
         getIntentData();
+        for (int i = 0; i < funcs.gameIdLists.length; i++) {
+            if(funcs.gameIdLists[i].equals(gameId)) {
+                funcs.params = funcs.gameUrlParams[i];
+            }
+        }
 
         // Initialize UI components
         initViews();
@@ -46,6 +54,7 @@ public class MenuTopUpB extends AppCompatActivity {
         setupBuyButton();
 
 //        Run Functions
+        getUsername();
     }
 
     private void initViews() {
@@ -55,6 +64,35 @@ public class MenuTopUpB extends AppCompatActivity {
         promoCheckBox = findViewById(R.id.promoCheckBox);
         emailEditText = findViewById(R.id.emailEditText);
         buyButton = findViewById(R.id.buyButton);
+        btnCheckUsername = findViewById(R.id.btnCheckUsername);
+        tvUsername = findViewById(R.id.tvUsername);
+    }
+
+    private void getUsername() {
+        btnCheckUsername.setOnClickListener(v -> {
+            String playerId = playerIdEditText.getText().toString().trim();
+            if (playerId.isEmpty()) {
+                playerIdEditText.setError("Player ID is required");
+                return;
+            }
+            funcs.getUsernameB(this, playerId, new Funcs.UsernameCallback() {
+                @Override
+                public void onUsernameReceived(String username) {
+                    // This code will run when the username is ready
+                    runOnUiThread(() -> {
+                        tvUsername.setText(username);
+                    });
+                }
+
+                @Override
+                public void onError(String e) {
+                    // Handle error here
+                    runOnUiThread(() -> {
+                        tvUsername.setText("User not found!");
+                    });
+                }
+            });
+        });
     }
 
     private void setupRecyclerView() {
@@ -116,6 +154,7 @@ public class MenuTopUpB extends AppCompatActivity {
         String[] itemImagesArray = intent.getStringArrayExtra("itemImages");
         String[] itemPricesArray = intent.getStringArrayExtra("itemPrices");
         String[] itemNamesArray = intent.getStringArrayExtra("itemNames");
+        gameId = intent.getStringExtra("gameId");
 
         numOfItemsList = Arrays.asList(numOfItemsArray);
         itemImagesList = Arrays.asList(itemImagesArray);
