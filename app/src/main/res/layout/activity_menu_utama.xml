@@ -39,7 +39,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/baseline_logout_24" />
+                app:srcCompat="@drawable/baseline_logout_32" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- GridLayout for images -->

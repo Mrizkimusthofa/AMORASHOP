@@ -46,5 +46,5 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.material.v1110)
     implementation(libs.okhttp)
-
+    implementation(libs.core.splashscreen)
 }
