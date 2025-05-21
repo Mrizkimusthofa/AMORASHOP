@@ -1,5 +1,7 @@
 package com.example.amorashop;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,25 +10,33 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class MenuTopUpA extends AppCompatActivity {
 
     // Declare UI components
     private EditText playerIdEditText, emailEditText, zonaIdEditText;
     private RecyclerView recyclerViewNominal;
-    private GridLayout paymentGrid;
-    private CheckBox promoCheckBox;
+//    private CheckBox promoCheckBox;
     private Button buyButton, btnCheckUsername;
+    private ImageView btnGopay, btnQris, btnDana, btnOvo, btnShopeePay;
+    private ConstraintLayout clGopay, clQris, clDana, clOvo, clShopeePay;
     private TextView tvUsername;
     private List<MyDataItem> data;
     private RVAdapter adapter;
@@ -53,7 +63,15 @@ public class MenuTopUpA extends AppCompatActivity {
 
         // Setup UI components
         setupRecyclerView();
-        setupPaymentGrid();
+
+        ImageView[] pmName = {
+                btnQris, btnGopay, btnDana, btnOvo, btnShopeePay
+        };
+        ConstraintLayout[] pmLayout = {
+                clQris, clGopay, clDana, clOvo, clShopeePay
+        };
+        Funcs.setupPaymentGrid(this, pmName, pmLayout);
+
         setupBuyButton();
 
 //        Run Functions
@@ -64,12 +82,21 @@ public class MenuTopUpA extends AppCompatActivity {
         playerIdEditText = findViewById(R.id.playerIdEditText);
         zonaIdEditText = findViewById(R.id.ZonaID);
         recyclerViewNominal = findViewById(R.id.recyclerViewNominal);
-        paymentGrid = findViewById(R.id.paymentGrid);
-        promoCheckBox = findViewById(R.id.promoCheckBox);
+//        promoCheckBox = findViewById(R.id.promoCheckBox);
         emailEditText = findViewById(R.id.emailEditText);
         buyButton = findViewById(R.id.buyButton);
         tvUsername = findViewById(R.id.tvUsername);
         btnCheckUsername = findViewById(R.id.btnCheckUsername);
+        btnGopay = findViewById(R.id.pmGopay);
+        btnQris = findViewById(R.id.pmQris);
+        btnDana = findViewById(R.id.pmDana);
+        btnOvo = findViewById(R.id.pmOvo);
+        btnShopeePay = findViewById(R.id.pmShopeePay);
+        clGopay = findViewById(R.id.clGopay);
+        clQris = findViewById(R.id.clQris);
+        clDana = findViewById(R.id.clDana);
+        clOvo = findViewById(R.id.clOvo);
+        clShopeePay = findViewById(R.id.clShopeePay);
     }
 
     private void getUsername() {
@@ -83,12 +110,14 @@ public class MenuTopUpA extends AppCompatActivity {
                 zonaIdEditText.setError("Zona ID is required");
                 return;
             }
+            Funcs.id_account = playerId;
             funcs.getUsernameA(this, playerId, zonaId, new Funcs.UsernameCallback() {
                 @Override
                 public void onUsernameReceived(String username) {
                     // This code will run when the username is ready
                     runOnUiThread(() -> {
                         tvUsername.setText(username);
+                        Funcs.nickname = tvUsername.getText().toString();
                     });
                 }
 
@@ -97,6 +126,7 @@ public class MenuTopUpA extends AppCompatActivity {
                     // Handle error here
                     runOnUiThread(() -> {
                         tvUsername.setText("User not found!");
+                        Funcs.nickname = "Unknown";
                     });
                 }
             });
@@ -124,13 +154,20 @@ public class MenuTopUpA extends AppCompatActivity {
 //        data.add(new MyDataItem("59 Diamond", "Rp. 21.000", "https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/150x150/50_MLBB_NewDemom.png"));
 //        data.add(new MyDataItem("17 Diamond", "Rp. 43.000","https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/150x150/150x250_MLBB_NewDemom.png"));
 
-        adapter = new RVAdapter(this, data);
+        adapter = new RVAdapter(this, data, this::onItemClick);
         recyclerViewNominal.setAdapter(adapter);
     }
 
-    private void setupPaymentGrid() {
-        // Populate the payment GridLayout (implement this function)
-        // Example: varioous payment options can be added from XML or programmatically
+    public void onItemClick(MyDataItem item, int position) {
+        // Logic to change background:
+        // 1. Tell the adapter which item is now selected
+        adapter.setSelectedPosition(position);
+
+        // 2. Optionally, do something else with the selected item
+        MyDataItem selectedItem = adapter.getSelectedItem();
+        if (selectedItem != null) {
+            // You can use the selectedItem data
+        }
     }
 
     private void setupBuyButton() {
@@ -139,18 +176,22 @@ public class MenuTopUpA extends AppCompatActivity {
 
     private void handleBuy() {
         String playerId = playerIdEditText.getText().toString().trim();
-        String email = emailEditText.getText().toString().trim();
-        boolean promoApplied = promoCheckBox.isChecked();
+//        String email = emailEditText.getText().toString().trim();
+//        boolean promoApplied = promoCheckBox.isChecked();
 
         // Validate inputs
         if (playerId.isEmpty()) {
             playerIdEditText.setError("Player ID is required");
             return;
         }
-        if (email.isEmpty()) {
-            emailEditText.setError("Email is required");
+//        if (email.isEmpty()) {
+//            emailEditText.setError("Email is required");
+//            return;
+//        }
 
-        }
+        Intent intent = new Intent(MenuTopUpA.this, KonfirmasiPembayaran.class);
+        startActivity(intent);
+
 
         // Implement API call or transaction logic here
         // Optionally handle promo logic based on promoApplied boolean

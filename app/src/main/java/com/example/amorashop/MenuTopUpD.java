@@ -6,8 +6,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -20,7 +22,8 @@ public class MenuTopUpD extends AppCompatActivity {
     // Declare UI components
     private EditText playerIdEditText, emailEditText;
     private RecyclerView recyclerViewNominal;
-    private GridLayout paymentGrid;
+    private ImageView btnGopay, btnQris, btnDana, btnOvo, btnShopeePay;
+    private ConstraintLayout clGopay, clQris, clDana, clOvo, clShopeePay;
     private CheckBox promoCheckBox;
     private Button buyButton;
     private List<MyDataItem> data;
@@ -42,7 +45,18 @@ public class MenuTopUpD extends AppCompatActivity {
 
         // Setup UI components
         setupRecyclerView();
-        setupPaymentGrid();
+
+        ImageView[] pmName = {
+                btnQris, btnGopay, btnDana, btnOvo, btnShopeePay
+        };
+        ConstraintLayout[] pmLayout = {
+                clQris, clGopay, clDana, clOvo, clShopeePay
+        };
+        Funcs.setupPaymentGrid(this, pmName, pmLayout);
+
+        Funcs.id_account = String.valueOf(0);
+        Funcs.nickname = "unknown";
+
         setupBuyButton();
 
 //        Run Functions
@@ -51,10 +65,19 @@ public class MenuTopUpD extends AppCompatActivity {
     private void initViews() {
         playerIdEditText = findViewById(R.id.playerIdEditText);
         recyclerViewNominal = findViewById(R.id.recyclerViewNominal);
-        paymentGrid = findViewById(R.id.paymentGrid);
         promoCheckBox = findViewById(R.id.promoCheckBox);
         emailEditText = findViewById(R.id.emailEditText);
         buyButton = findViewById(R.id.buyButton);
+        btnGopay = findViewById(R.id.pmGopay);
+        btnQris = findViewById(R.id.pmQris);
+        btnDana = findViewById(R.id.pmDana);
+        btnOvo = findViewById(R.id.pmOvo);
+        btnShopeePay = findViewById(R.id.pmShopeePay);
+        clGopay = findViewById(R.id.clGopay);
+        clQris = findViewById(R.id.clQris);
+        clDana = findViewById(R.id.clDana);
+        clOvo = findViewById(R.id.clOvo);
+        clShopeePay = findViewById(R.id.clShopeePay);
     }
 
     private void setupRecyclerView() {
@@ -78,13 +101,20 @@ public class MenuTopUpD extends AppCompatActivity {
 //        data.add(new MyDataItem("59 Diamond", "Rp. 21.000", "https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/150x150/50_MLBB_NewDemom.png"));
 //        data.add(new MyDataItem("17 Diamond", "Rp. 43.000","https://cdn1.codashop.com/S/content/common/images/denom-image/MLBB/150x150/150x250_MLBB_NewDemom.png"));
 
-        adapter = new RVAdapter(this, data);
+        adapter = new RVAdapter(this, data, this::onItemClick);
         recyclerViewNominal.setAdapter(adapter);
     }
 
-    private void setupPaymentGrid() {
-        // Populate the payment GridLayout (implement this function)
-        // Example: varioous payment options can be added from XML or programmatically
+    public void onItemClick(MyDataItem item, int position) {
+        // Logic to change background:
+        // 1. Tell the adapter which item is now selected
+        adapter.setSelectedPosition(position);
+
+        // 2. Optionally, do something else with the selected item
+        MyDataItem selectedItem = adapter.getSelectedItem();
+        if (selectedItem != null) {
+            // You can use the selectedItem data
+        }
     }
 
     private void setupBuyButton() {
@@ -92,19 +122,22 @@ public class MenuTopUpD extends AppCompatActivity {
     }
 
     private void handleBuy() {
-        String playerId = playerIdEditText.getText().toString().trim();
-        String email = emailEditText.getText().toString().trim();
-        boolean promoApplied = promoCheckBox.isChecked();
+//        String playerId = playerIdEditText.getText().toString().trim();
+//        String email = emailEditText.getText().toString().trim();
+//        boolean promoApplied = promoCheckBox.isChecked();
 
         // Validate inputs
-        if (playerId.isEmpty()) {
-            playerIdEditText.setError("Player ID is required");
-            return;
-        }
-        if (email.isEmpty()) {
-            emailEditText.setError("Email is required");
+//        if (playerId.isEmpty()) {
+//            playerIdEditText.setError("Player ID is required");
+//            return;
+//        }
+//        if (email.isEmpty()) {
+//            emailEditText.setError("Email is required");
+//
+//        }
 
-        }
+        Intent intent = new Intent(MenuTopUpD.this, KonfirmasiPembayaran.class);
+        startActivity(intent);
 
         // Implement API call or transaction logic here
         // Optionally handle promo logic based on promoApplied boolean

@@ -9,11 +9,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -26,6 +28,8 @@ public class MenuTopUpC extends AppCompatActivity {
     // Declare UI components
     private EditText playerIdEditText, emailEditText;
     private RecyclerView recyclerViewNominal;
+    private ImageView btnGopay, btnQris, btnDana, btnOvo, btnShopeePay;
+    private ConstraintLayout clGopay, clQris, clDana, clOvo, clShopeePay;
     private Spinner spinServer;
     private CheckBox promoCheckBox;
     private Button buyButton, btnCheckUsername;
@@ -56,7 +60,15 @@ public class MenuTopUpC extends AppCompatActivity {
 
         // Setup UI components
         setupRecyclerView();
-        setupPaymentGrid();
+
+        ImageView[] pmName = {
+                btnQris, btnGopay, btnDana, btnOvo, btnShopeePay
+        };
+        ConstraintLayout[] pmLayout = {
+                clQris, clGopay, clDana, clOvo, clShopeePay
+        };
+        Funcs.setupPaymentGrid(this, pmName, pmLayout);
+
         setupBuyButton();
 
 //        Run Functions
@@ -74,6 +86,16 @@ public class MenuTopUpC extends AppCompatActivity {
         buyButton = findViewById(R.id.buyButton);
         btnCheckUsername = findViewById(R.id.btnCheckUsername);
         tvUsername = findViewById(R.id.tvUsername);
+        btnGopay = findViewById(R.id.pmGopay);
+        btnQris = findViewById(R.id.pmQris);
+        btnDana = findViewById(R.id.pmDana);
+        btnOvo = findViewById(R.id.pmOvo);
+        btnShopeePay = findViewById(R.id.pmShopeePay);
+        clGopay = findViewById(R.id.clGopay);
+        clQris = findViewById(R.id.clQris);
+        clDana = findViewById(R.id.clDana);
+        clOvo = findViewById(R.id.clOvo);
+        clShopeePay = findViewById(R.id.clShopeePay);
     }
 
     private void getUsername() {
@@ -83,12 +105,15 @@ public class MenuTopUpC extends AppCompatActivity {
                 playerIdEditText.setError("Player ID is required");
                 return;
             }
+
+            Funcs.id_account = playerId;
             funcs.getUsernameC(this, playerId, new Funcs.UsernameCallback() {
                 @Override
                 public void onUsernameReceived(String username) {
                     // This code will run when the username is ready
                     runOnUiThread(() -> {
                         tvUsername.setText(username);
+                        Funcs.nickname = tvUsername.getText().toString();
                     });
                 }
 
@@ -97,6 +122,7 @@ public class MenuTopUpC extends AppCompatActivity {
                     // Handle error here
                     runOnUiThread(() -> {
                         tvUsername.setText("User not found!");
+                        Funcs.nickname = "Unknown";
                     });
                 }
             });
@@ -120,13 +146,20 @@ public class MenuTopUpC extends AppCompatActivity {
             data.add(new MyDataItem(numOfItemsList.get(i)+" "+itemNamesList.get(i), funcs.formatIdr(itemPricesList.get(i)), itemImagesList.get(i)));
         }
 
-        adapter = new RVAdapter(this, data);
+        adapter = new RVAdapter(this, data, this::onItemClick);
         recyclerViewNominal.setAdapter(adapter);
     }
 
-    private void setupPaymentGrid() {
-        // Populate the payment GridLayout (implement this function)
-        // Example: varioous payment options can be added from XML or programmatically
+    public void onItemClick(MyDataItem item, int position) {
+        // Logic to change background:
+        // 1. Tell the adapter which item is now selected
+        adapter.setSelectedPosition(position);
+
+        // 2. Optionally, do something else with the selected item
+        MyDataItem selectedItem = adapter.getSelectedItem();
+        if (selectedItem != null) {
+            // You can use the selectedItem data
+        }
     }
 
     private void setupBuyButton() {
@@ -135,21 +168,24 @@ public class MenuTopUpC extends AppCompatActivity {
 
     private void handleBuy() {
         String playerId = playerIdEditText.getText().toString().trim();
-        String email = emailEditText.getText().toString().trim();
-        boolean promoApplied = promoCheckBox.isChecked();
+//        String email = emailEditText.getText().toString().trim();
+//        boolean promoApplied = promoCheckBox.isChecked();
 
         // Validate inputs
         if (playerId.isEmpty()) {
             playerIdEditText.setError("Player ID is required");
             return;
         }
-        if (email.isEmpty()) {
-            emailEditText.setError("Email is required");
-
-        }
+//        if (email.isEmpty()) {
+//            emailEditText.setError("Email is required");
+//
+//        }
 
         // Implement API call or transaction logic here
         // Optionally handle promo logic based on promoApplied boolean
+
+        Intent intent = new Intent(MenuTopUpC.this, KonfirmasiPembayaran.class);
+        startActivity(intent);
     }
 
     public void getIntentData() {

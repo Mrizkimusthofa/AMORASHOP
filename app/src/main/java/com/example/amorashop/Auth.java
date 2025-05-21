@@ -27,6 +27,8 @@ public class Auth {
     String registerUrl = baseUrl + "register";
     String layoutUrl = baseUrl + "layout/";
 //    String getTokenUrl = baseUrl + "gettoken";
+    String createOrder = baseUrl + "order/create";
+    String getOrder = baseUrl + "order/";
 
     private static final String SHARED_PREF_NAME = "com.amora.sharedpref_key";
     private static final String KEY_SESSION = "session_key";

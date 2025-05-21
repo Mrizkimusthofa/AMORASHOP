@@ -8,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 // 1. Define your data model (the type of data each item in the list represents)
@@ -46,12 +48,42 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         imageView = itemView.findViewById(R.id.ivItemImage); // Replace with your actual IDs
     }
 
-    public void bind(MyDataItem item) {
+    public void bind(MyDataItem item, RVAdapter.OnItemCLickListener listener, boolean isSelected) {
         numOfItemTextView.setText(item.getNumOfItem());
         itemPriceTextView.setText(item.getItemPrice());
         Glide.with(itemView.getContext())
                 .load(item.getItemImage())
                 .into(imageView);
+
+        // Set background based on selection state
+        if (isSelected) {
+            itemView.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.color.splash_bg));
+            int pay_price = Integer.parseInt(item.getItemPrice().replace("Rp", "").replace(".", ""));
+            long pay_tax = Math.round(pay_price * 0.11);
+            long pay_total = pay_price + pay_tax;
+
+            Funcs.item_info = item.getNumOfItem();
+            Funcs.pay_price = String.valueOf(pay_price);
+            Funcs.pay_tax = String.valueOf(pay_tax);
+            Funcs.pay_total = String.valueOf(pay_total);
+
+        } else {
+            itemView.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.color.white));
+        }
+
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(item, position);
+                        // The adapter will handle updating the selectedPosition and notifying changes
+                    }
+                }
+            }
+        });
     }
 }
 
@@ -60,10 +92,17 @@ public class RVAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private final List<MyDataItem> data;
     private final Context context;
+    private final OnItemCLickListener listener;
+    private int selectedPosition = RecyclerView.NO_POSITION;
 
-    public RVAdapter(Context context, List<MyDataItem> data) {
+    public interface OnItemCLickListener {
+        void onItemClick(MyDataItem item, int position);
+    }
+
+    public RVAdapter(Context context, List<MyDataItem> data, OnItemCLickListener listener) {
         this.context = context;
         this.data = data;
+        this.listener = listener;
     }
 
     @NonNull
@@ -76,11 +115,39 @@ public class RVAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         MyDataItem item = data.get(position);
-        holder.bind(item);
+        holder.bind(item, listener,position == selectedPosition);
     }
 
     @Override
     public int getItemCount() {
         return data.size();
     }
+
+//    From Here
+
+    public void setSelectedPosition(int position) {
+        int previousSelectedPosition = selectedPosition;
+        selectedPosition = position;
+
+        // Notify the previously selected item to redraw (to remove selection)
+        if (previousSelectedPosition != RecyclerView.NO_POSITION) {
+            notifyItemChanged(previousSelectedPosition);
+        }
+        // Notify the new selected item to redraw (to apply selection)
+        if (selectedPosition != RecyclerView.NO_POSITION) {
+            notifyItemChanged(selectedPosition);
+        }
+    }
+
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
+
+    public MyDataItem getSelectedItem() {
+        if (selectedPosition != RecyclerView.NO_POSITION && selectedPosition < data.size()) {
+            return data.get(selectedPosition);
+        }
+        return null;
+    }
+
 }

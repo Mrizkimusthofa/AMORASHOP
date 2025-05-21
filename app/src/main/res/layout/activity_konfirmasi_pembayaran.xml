@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalPayment" />
+        app:layout_constraintTop_toBottomOf="@+id/payTotal" />
 
     <TextView
         android:id="@+id/title"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/diamondInfo"
+        android:id="@+id/itemInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/diamondInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/itemInfo" />
 
     <TextView
         android:id="@+id/idInfo"
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/idInfo" />
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/payPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -107,7 +107,7 @@
         app:layout_constraintTop_toBottomOf="@+id/payMethod" />
 
     <TextView
-        android:id="@+id/tax"
+        android:id="@+id/payTax"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -117,10 +117,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price" />
+        app:layout_constraintTop_toBottomOf="@+id/payPrice"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
-        android:id="@+id/totalPayment"
+        android:id="@+id/payTotal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
@@ -129,6 +130,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tax" />
+        app:layout_constraintTop_toBottomOf="@+id/payTax" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

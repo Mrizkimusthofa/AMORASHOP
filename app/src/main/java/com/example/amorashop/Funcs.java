@@ -1,8 +1,13 @@
 package com.example.amorashop;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -11,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpResponse;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,9 +34,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 
 public class Funcs {
-    String username;
-    String params;
-    String accServer;
+    String username, params, accServer;
     String[] gameIdLists = new String[]{
             "mlbb", "ff", "gi", "hok", "pubgm", "valo", "codm", "eafc", "mcgg", "sg", "sos", "lol", "aov", "lolw", "ss", "rm", "zzz", "hsr"
     };
@@ -42,6 +46,8 @@ public class Funcs {
     };
 
     String baseUrl = "https://id-game-checker.p.rapidapi.com/";
+
+    static String id_account, nickname, payment_method, item_info, pay_price, pay_tax, pay_total;
 
 //    Capitalize String
     public String toCapitalized(String str) {
@@ -246,5 +252,42 @@ public class Funcs {
         queue.add(stringRequest);
     }
 
+    @SuppressLint("ResourceAsColor")
+    static void setupPaymentGrid(Context thisContext, ImageView[] pmViewName, ConstraintLayout[] pmLayout) {
+        String[] pmImgUrl = {
+                "https://cdn1.codashop.com/S/content/common/images/mno/QRIS_ID_CHNL_LOGO.webp",
+                "https://cdn1.codashop.com/S/content/common/images/mno/GO_PAY_ID_CHNL_LOGO.webp",
+                "https://cdn1.codashop.com/S/content/common/images/mno/DANA_ID_CHNL_LOGO.webp",
+                "https://cdn1.codashop.com/S/content/common/images/mno/OVO_ID_CHNL_LOGO.webp",
+                "https://cdn1.codashop.com/S/content/common/images/mno/SHOPEE_PAY_ID_CHNL_LOGO.webp"
+        };
+        String[] pmName = {
+                "QRIS", "Gopay", "Dana", "OVO", "ShopeePay"
+        };
+
+
+        for (int i = 0; i<pmImgUrl.length; i++) {
+            Glide.with(thisContext)
+                    .load(pmImgUrl[i])
+                    .into(pmViewName[i]);
+            int finalI = i;
+
+            pmLayout[finalI].setOnClickListener(v -> {
+                payment_method = pmName[finalI];
+                Context context = v.getContext();
+                for (int j=0; j<pmLayout.length; j++) {
+                    if(!pmLayout[j].equals(pmLayout[finalI])) {
+                        pmLayout[j].setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+                    } else {
+                        pmLayout[j].setBackgroundColor(ContextCompat.getColor(context, R.color.splash_bg));
+                    }
+                }
+            });
+        }
+    }
+
+    public void getPaymentData() {
+
+    }
 
 }
